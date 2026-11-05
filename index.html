@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <script>
+    /* Pick the language (?lang= > saved choice > browser) and theme before first paint. */
+    (function () {
+      var d = document.documentElement, L = ["en", "fr", "ar"], l = null, s = null;
+      try { l = new URLSearchParams(location.search).get("lang"); s = localStorage.getItem("sf-lang"); } catch (e) {}
+      if (L.indexOf(l) < 0) l = null;
+      if (!l && L.indexOf(s) >= 0) l = s;
+      if (!l) { var n = navigator.languages || [navigator.language || "en"]; for (var i = 0; i < n.length; i++) { var c = String(n[i]).slice(0, 2).toLowerCase(); if (L.indexOf(c) >= 0) { l = c; break; } } }
+      l = l || "en"; d.lang = l; d.dir = l === "ar" ? "rtl" : "ltr"; if (l !== "en") d.className += " i18n-wait";
+      try { var t = localStorage.getItem("sf-theme"); if (t === "light" || t === "dark") d.setAttribute("data-theme", t); } catch (e) {}
+    })();
+  </script>
+  <title data-i18n="meta.title">Salat First — Prayer Times, Quran &amp; Hadith for Chrome</title>
+  <meta name="description" data-i18n-attr="content:meta.desc" content="A free Chrome extension with prayer times and adhan notifications, a Quran reader with recitations, Sahih al-Bukhari and Sahih Muslim, and the weather on every new tab. In English, French and Arabic.">
+  <meta name="theme-color" content="#3b2f5c">
+  <link rel="icon" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/icon.png">
+  <link rel="preload" href="assets/fonts/readex-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/aref-ruqaa-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/site.css">
+  <link rel="alternate" hreflang="en" href="https://zakaria-bali.github.io/salat-first/">
+  <link rel="alternate" hreflang="fr" href="https://zakaria-bali.github.io/salat-first/?lang=fr">
+  <link rel="alternate" hreflang="ar" href="https://zakaria-bali.github.io/salat-first/?lang=ar">
+  <link rel="alternate" hreflang="x-default" href="https://zakaria-bali.github.io/salat-first/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Salat First">
+  <meta property="og:url" content="https://zakaria-bali.github.io/salat-first/">
+  <meta property="og:title" data-i18n-attr="content:meta.title" content="Salat First — Prayer Times, Quran &amp; Hadith for Chrome">
+  <meta property="og:description" data-i18n-attr="content:meta.desc" content="A free Chrome extension with prayer times and adhan notifications, a Quran reader with recitations, Sahih al-Bukhari and Sahih Muslim, and the weather on every new tab. In English, French and Arabic.">
+  <meta property="og:image" content="https://zakaria-bali.github.io/salat-first/assets/marquee.png">
+  <meta property="og:image:width" content="1400">
+  <meta property="og:image:height" content="560">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="fr_FR">
+  <meta property="og:locale:alternate" content="ar_AR">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Salat First",
+    "alternateName": "الصلاة أولا",
+    "description": "Prayer times and adhan notifications, a Quran reader with recitations, Sahih al-Bukhari and Sahih Muslim, and the weather on every new tab.",
+    "applicationCategory": "LifestyleApplication",
+    "operatingSystem": "Google Chrome",
+    "inLanguage": ["en", "fr", "ar"],
+    "url": "https://zakaria-bali.github.io/salat-first/",
+    "image": "https://zakaria-bali.github.io/salat-first/assets/marquee.png",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "author": { "@type": "Person", "name": "Zakaria Bali" }
+  }
+  </script>
+  <script src="assets/i18n.js" defer></script>
+  <script src="assets/prayer.js" defer></script>
+  <script src="assets/site.js" defer></script>
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="skyline" viewBox="0 0 400 170"><g fill="var(--sk-wall)"><rect x="0" y="106" width="46" height="64"/><rect x="44" y="135" width="42" height="35"/><rect x="84" y="123" width="53" height="47"/><rect x="135" y="106" width="19" height="64"/><rect x="236" y="118" width="30" height="52"/><rect x="330" y="127" width="53" height="43"/><rect x="381" y="112" width="23" height="58"/><path d="M159 170C160 136 164 104 171 78" fill="none" stroke="var(--sk-wall)" stroke-width="5" stroke-linecap="round"/><path d="M171 78c-14-12-30-12-42-2 14-4 29-2 42 6z"/><path d="M171 78c13-14 29-15 41-6-14-3-28 0-41 9z"/><path d="M171 78c-6-17-17-25-31-27 13 7 22 16 29 30z"/><path d="M171 78c9-16 21-23 35-22-13 5-24 13-33 26z"/><path d="M171 78c-1-14 3-27 10-36-3 12-4 24-7 37z"/><rect x="150" y="146" width="56" height="24"/><rect x="196" y="150" width="44" height="20"/><rect x="203" y="48" width="30" height="122"/><rect x="200" y="42" width="36" height="9"/><rect x="200" y="36" width="4" height="7"/><rect x="208" y="36" width="4" height="7"/><rect x="216" y="36" width="4" height="7"/><rect x="224" y="36" width="4" height="7"/><rect x="232" y="36" width="4" height="7"/><rect x="210" y="20" width="16" height="23"/><path d="M210 21q8-11 16 0z"/><rect x="217" y="2" width="2" height="12"/><circle cx="218" cy="6" r="2.4"/><circle cx="218" cy="11" r="2"/><rect x="260" y="122" width="72" height="48"/><path d="M270 123a26 26 0 0 1 52 0z"/><rect x="295" y="88" width="2" height="10"/><circle cx="296" cy="94" r="2.2"/></g><g fill="var(--sk-win)"><rect x="7" y="115" width="5" height="7" rx="1"/><rect x="23" y="115" width="5" height="7" rx="1"/><rect x="7" y="133" width="5" height="7" rx="1"/><rect x="54" y="144" width="5" height="7" rx="1"/><rect x="67" y="144" width="5" height="7" rx="1"/><rect x="91" y="132" width="5" height="7" rx="1"/><rect x="143" y="133" width="5" height="7" rx="1"/><rect x="244" y="145" width="5" height="7" rx="1"/><rect x="388" y="139" width="5" height="7" rx="1"/><rect x="215" y="62" width="6" height="11" rx="3"/><rect x="215" y="92" width="6" height="11" rx="3"/><rect x="215" y="122" width="6" height="11" rx="3"/><rect x="215" y="26" width="5" height="9" rx="2.5"/><rect x="272" y="136" width="6" height="9" rx="1"/><rect x="292" y="136" width="8" height="12" rx="4"/><rect x="314" y="136" width="6" height="9" rx="1"/></g></symbol>
+    <symbol id="houses" viewBox="0 0 400 170"><g fill="var(--sk-wall)"><rect x="0" y="144" width="53" height="26"/><rect x="51" y="128" width="60" height="42"/><rect x="109" y="133" width="58" height="37"/><rect x="165" y="120" width="59" height="50"/><rect x="222" y="128" width="38" height="42"/><rect x="258" y="119" width="54" height="51"/><rect x="310" y="120" width="62" height="50"/><rect x="370" y="130" width="34" height="40"/></g><g fill="var(--sk-win)"><rect x="42" y="153" width="5" height="7" rx="1"/><rect x="61" y="137" width="5" height="7" rx="1"/><rect x="75" y="137" width="5" height="7" rx="1"/><rect x="118" y="142" width="5" height="7" rx="1"/><rect x="172" y="129" width="5" height="7" rx="1"/><rect x="191" y="129" width="5" height="7" rx="1"/><rect x="206" y="129" width="5" height="7" rx="1"/><rect x="175" y="147" width="5" height="7" rx="1"/><rect x="231" y="137" width="5" height="7" rx="1"/><rect x="265" y="128" width="5" height="7" rx="1"/><rect x="297" y="128" width="5" height="7" rx="1"/><rect x="267" y="146" width="5" height="7" rx="1"/><rect x="320" y="129" width="5" height="7" rx="1"/><rect x="352" y="129" width="5" height="7" rx="1"/><rect x="378" y="139" width="5" height="7" rx="1"/></g></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-next" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-ext" viewBox="0 0 24 24"><path d="M9 3h6v3a2 2 0 1 0 4 0V3h2v6h-3a2 2 0 1 0 0 4h3v8h-8v-3a2 2 0 1 0-4 0v3H3v-8h3a2 2 0 1 0 0-4H3V3h6z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+  </svg>
+
+  <a class="skip" href="#main" data-i18n="nav.skip">Skip to content</a>
+
+  <header class="nav" id="nav">
+    <div class="wrap">
+      <a class="brand" href="./"><img src="assets/icon.png" alt="" width="34" height="34"><span data-i18n="brand">Salat First</span></a>
+      <nav class="nav-links" data-i18n-attr="aria-label:nav.main" aria-label="Main">
+        <a href="#features" data-i18n="nav.features">Features</a>
+        <a href="#preview" data-i18n="nav.preview">Live preview</a>
+        <a href="#screenshots" data-i18n="nav.screens">Screenshots</a>
+        <a href="#faq" data-i18n="nav.faq">FAQ</a>
+        <a class="keep" href="#support" data-i18n="nav.support">Support</a>
+      </nav>
+      <div class="nav-tools">
+        <div class="lang" role="group" data-i18n-attr="aria-label:nav.lang" aria-label="Language">
+          <a href="?lang=en" hreflang="en" lang="en" title="English" data-set-lang="en">EN</a>
+          <a href="?lang=fr" hreflang="fr" lang="fr" title="Français" data-set-lang="fr">FR</a>
+          <a href="?lang=ar" hreflang="ar" lang="ar" title="العربية" data-set-lang="ar">عربي</a>
+        </div>
+        <button class="icon-btn" id="themeBtn" type="button" aria-label="Switch theme">
+          <svg class="i-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+          <svg class="i-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+
+    <!-- ===== Hero ===== -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-stars" aria-hidden="true"></div>
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <span class="pill" data-i18n="hero.badge">Free Chrome extension</span>
+          <p class="hero-ar" lang="ar">الصلاة أولا</p>
+          <h1 id="hero-title" data-i18n="hero.title">Prayer times, Quran and hadith on every new tab</h1>
+          <p class="hero-lede" data-i18n="hero.lede">Accurate prayer times for where you are, with adhan notifications. A Quran reader with verse-by-verse recitation, Sahih al-Bukhari and Sahih Muslim, and the weather. Open a tab and the next prayer is right there.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" data-store href="https://chromewebstore.google.com/search/Salat%20First" target="_blank" rel="noopener">
+              <svg width="18" height="18" aria-hidden="true"><use href="#i-ext"/></svg><span data-i18n="cta.add">Add to Chrome</span>
+            </a>
+            <a class="btn btn-ghost" href="#preview" data-i18n="hero.cta2">Try the live preview</a>
+          </div>
+          <p class="hero-note" data-i18n="hero.note">Free · No account · No ads</p>
+        </div>
+        <div class="hero-shot">
+          <div class="frame">
+            <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span class="frame-url" data-i18n="frame.url">New Tab</span></div>
+            <picture>
+              <source type="image/webp" srcset="assets/screenshot-1-quran-player.webp" data-i18n-attr="srcset:hero.webp">
+              <img src="assets/screenshot-1-quran-player.png" width="1280" height="800" fetchpriority="high"
+                   data-i18n-attr="src:hero.png;alt:hero.alt"
+                   alt="The Salat First dashboard on a new tab: the next prayer with a countdown, today's prayer times, the weather, the Quran player and a hadith">
+            </picture>
+          </div>
+        </div>
+      </div>
+      <svg class="hero-skyline" viewBox="0 0 1200 170" preserveAspectRatio="xMaxYMax slice" aria-hidden="true" style="--sk-wall:#111626;--sk-win:#ffcd7a">
+        <use href="#houses" x="0" width="400" height="170"/><use href="#houses" x="400" width="400" height="170"/><use href="#skyline" x="800" width="400" height="170"/>
+      </svg>
+    </section>
+
+    <!-- ===== Stats ===== -->
+    <section class="stats" data-i18n-attr="aria-label:stats.label" aria-label="Salat First in numbers">
+      <div class="stat"><b>16</b><span data-i18n="stats.methods">calculation methods</span></div>
+      <div class="stat"><b>114</b><span data-i18n="stats.surahs">surahs</span></div>
+      <div class="stat"><b>15</b><span data-i18n="stats.reciters">reciters</span></div>
+      <div class="stat"><b>4</b><span data-i18n="stats.hadith">hadith collections</span></div>
+      <div class="stat"><b>3</b><span data-i18n="stats.langs">languages</span></div>
+      <div class="stat"><b>0</b><span data-i18n="stats.trackers">trackers</span></div>
+    </section>
+
+    <!-- ===== Live preview ===== -->
+    <section class="section" id="preview" aria-labelledby="preview-h">
+      <div class="section-head">
+        <span class="label" data-i18n="preview.label">Live preview</span>
+        <h2 id="preview-h" data-i18n="preview.title">Your next prayer, right now</h2>
+        <p class="lede" data-i18n="preview.lede">This is the card you'll see on every new tab, running live on this page. Pick a city or use your location. The times are calculated in your browser, and nothing is sent anywhere.</p>
+      </div>
+
+      <div class="live-controls">
+        <label class="field"><span data-i18n="preview.city">City</span>
+          <select class="select" id="city"></select>
+        </label>
+        <button class="btn btn-ghost btn-sm" id="locate" type="button">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="3.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="7.5"/></svg>
+          <span data-i18n="preview.locate">Use my location</span>
+        </button>
+        <p class="live-status" id="liveStatus" role="status" aria-live="polite"></p>
+      </div>
+
+      <div class="live-grid">
+        <div class="sky" id="sky" data-phase="day">
+          <div class="sky-stars" aria-hidden="true"></div>
+          <div class="sky-sun" id="skySun" aria-hidden="true"></div>
+          <svg class="sky-moon" id="skyMoon" viewBox="-24 -24 48 48" aria-hidden="true" hidden><circle r="16" fill="rgba(255,255,255,.1)"/><path id="moonLit" fill="#f6eedb"/></svg>
+          <svg class="sky-skyline" viewBox="0 0 400 170" aria-hidden="true"><use href="#skyline"/></svg>
+          <div class="sky-text" aria-live="off">
+            <span class="sky-label" data-js="next">Next prayer</span>
+            <span class="sky-ar" id="skyAr" lang="ar">—</span>
+            <span class="sky-name"><span id="skyName"></span><span class="t" id="skyTime"></span></span>
+            <span class="sky-count" id="skyCount" role="timer">--:--:--</span>
+          </div>
+        </div>
+
+        <div class="today card">
+          <div class="today-head"><h3 data-js="today">Today</h3><span id="todayDate"></span></div>
+          <ol class="times" id="times"></ol>
+          <div class="chips">
+            <span class="chip" id="hijriChip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg><span id="hijri"></span></span>
+            <span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path class="qn" id="qiblaNeedle" d="M12 6l2.5 6h-5z" fill="currentColor" stroke="none" style="transform-origin:12px 12px"/></svg><span id="qibla"></span></span>
+            <span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span id="localTime"></span></span>
+          </div>
+          <p class="method" id="method"></p>
+        </div>
+      </div>
+      <p class="live-note" data-i18n="preview.note">Each city uses the method most common there. In the extension you choose from 16 calculation methods and turn on the notifications you want.</p>
+    </section>
+
+    <!-- ===== Features ===== -->
+    <section class="section" id="features" aria-labelledby="features-h">
+      <div class="section-head">
+        <span class="label" data-i18n="features.label">Features</span>
+        <h2 id="features-h" data-i18n="features.title">Made for the rhythm of your day</h2>
+        <p class="lede" data-i18n="features.lede">Salat First turns Chrome's new tab into a calm dashboard. One glance tells you how long until the next prayer, and the Quran is always a click away.</p>
+      </div>
+      <div class="features">
+        <article class="card feature">
+          <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9a6 6 0 0 1 12 0c0 6 2.5 8 2.5 8h-17S6 15 6 9z"/><path d="M10.2 20.5a2 2 0 0 0 3.6 0"/></svg></span>
+          <h3 data-i18n="f1.t">Prayer times and adhan alerts</h3>
+          <p data-i18n="f1.d">16 calculation methods, including Morocco (Ministry of Habous). A live countdown, a notification at each prayer and an optional reminder before it.</p>
+        </article>
+        <article class="card feature">
+          <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 5h6a3.5 3.5 0 0 1 3.5 3.5V20a2.5 2.5 0 0 0-2.5-2.5h-7z"/><path d="M21.5 5h-6A3.5 3.5 0 0 0 12 8.5V20a2.5 2.5 0 0 1 2.5-2.5h7z"/></svg></span>
+          <h3 data-i18n="f2.t">Read and listen to the Quran</h3>
+          <p data-i18n="f2.d">All 114 surahs in the Uthmani script, with English or French translation. Tap a verse to hear it from one of 15 reciters.</p>
+        </article>
+        <article class="card feature">
+          <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/><path d="M9 8h7M9 12h5"/></svg></span>
+          <h3 data-i18n="f3.t">A hadith on every tab</h3>
+          <p data-i18n="f3.d">Sahih al-Bukhari, Sahih Muslim, An-Nawawi's Forty and Forty Hadith Qudsi, in Arabic with translation. Copy one to share it.</p>
+        </article>
+        <article class="card feature">
+          <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3v1.5M3.5 8H2M4.8 4.8l1 1M12.2 4.8l-1 1"/><path d="M5.2 11.5A4 4 0 1 1 12 7.6"/><path d="M8 21h10a4 4 0 0 0 .4-8 5.5 5.5 0 0 0-10.6 1.5A3.3 3.3 0 0 0 8 21z"/></svg></span>
+          <h3 data-i18n="f4.t">Weather</h3>
+          <p data-i18n="f4.d">Current conditions and a 5-day forecast for your location, in °C or °F. Turn it off if you don't need it.</p>
+        </article>
+        <article class="card feature">
+          <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></svg></span>
+          <h3 data-i18n="f5.t">Qibla and calendar</h3>
+          <p data-i18n="f5.d">The Qibla direction, Hijri and Gregorian dates, and a monthly timetable to plan ahead.</p>
+        </article>
+        <article class="card feature">
+          <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="3.5" width="19" height="17" rx="2.5"/><path d="M2.5 8h19"/><rect x="11" y="10.5" width="8" height="7.5" rx="1.5"/></svg></span>
+          <h3 data-i18n="f6.t">One click from the toolbar</h3>
+          <p data-i18n="f6.d">The countdown and today's times in a popup, with a badge on the icon in the final hour before each prayer.</p>
+        </article>
+        <article class="card feature">
+          <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19.5 14A7.5 7.5 0 0 1 10 4.5a7.5 7.5 0 1 0 9.5 9.5z"/><path d="M17 3v4M15 5h4"/></svg></span>
+          <h3 data-i18n="f7.t">A sky that follows the day</h3>
+          <p data-i18n="f7.d">The next-prayer card moves from dawn to day, then dusk and night, with the real phase of the moon. Light and dark themes.</p>
+        </article>
+        <article class="card feature">
+          <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h9M8.5 3v2M6 5c0 4 3 7 6 8M11 5c-1 4-4 7-7 8"/><path d="m13 21 4-9 4 9M14.5 18h5"/></svg></span>
+          <h3 data-i18n="f8.t">Your language, your direction</h3>
+          <p data-i18n="f8.d">English, French and Arabic. The Arabic interface reads right to left, all the way through.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== Screenshots ===== -->
+    <section class="section" id="screenshots" aria-labelledby="shots-h">
+      <div class="section-head">
+        <span class="label" data-i18n="shots.label">Screenshots</span>
+        <h2 id="shots-h" data-i18n="shots.title">See it on a new tab</h2>
+      </div>
+      <div class="tabs" role="tablist" data-i18n-attr="aria-label:shots.label" aria-label="Screenshots">
+        <button type="button" role="tab" id="tab-0" aria-controls="shot-0" aria-selected="true" data-i18n="shots.t1">By day</button>
+        <button type="button" role="tab" id="tab-1" aria-controls="shot-1" aria-selected="false" tabindex="-1" data-i18n="shots.t2">At night</button>
+        <button type="button" role="tab" id="tab-2" aria-controls="shot-2" aria-selected="false" tabindex="-1" data-i18n="shots.t3">In Arabic</button>
+        <button type="button" role="tab" id="tab-3" aria-controls="shot-3" aria-selected="false" tabindex="-1" data-i18n="shots.t4">Toolbar popup</button>
+      </div>
+      <figure class="shot" id="shot-0" role="tabpanel" aria-labelledby="tab-0">
+        <button class="zoom" type="button" data-full="assets/screenshot-1-quran-player.png" data-i18n-attr="aria-label:shots.zoom" aria-label="Open full size">
+          <span class="frame"><span class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span class="frame-url" data-i18n="frame.url">New Tab</span></span>
+          <picture><source type="image/webp" srcset="assets/screenshot-1-quran-player.webp"><img src="assets/screenshot-1-quran-player.png" width="1280" height="800" loading="lazy" data-i18n-attr="alt:shots.a1" alt="The dashboard by day, with Surah Yaseen playing"></picture></span>
+        </button>
+        <figcaption data-i18n="shots.c1">Daytime, with Surah Yaseen playing and a hadith from Forty Hadith Qudsi.</figcaption>
+      </figure>
+      <figure class="shot" id="shot-1" role="tabpanel" aria-labelledby="tab-1" hidden>
+        <button class="zoom" type="button" data-full="assets/screenshot-2-night.png" data-i18n-attr="aria-label:shots.zoom" aria-label="Open full size">
+          <span class="frame"><span class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span class="frame-url" data-i18n="frame.url">New Tab</span></span>
+          <picture><source type="image/webp" srcset="assets/screenshot-2-night.webp"><img src="assets/screenshot-2-night.png" width="1280" height="800" loading="lazy" data-i18n-attr="alt:shots.a2" alt="The dashboard at night in the dark theme, with a crescent moon over the minaret"></picture></span>
+        </button>
+        <figcaption data-i18n="shots.c2">At night, in the dark theme, with the real phase of the moon.</figcaption>
+      </figure>
+      <figure class="shot" id="shot-2" role="tabpanel" aria-labelledby="tab-2" hidden>
+        <button class="zoom" type="button" data-full="assets/screenshot-3-arabic.png" data-i18n-attr="aria-label:shots.zoom" aria-label="Open full size">
+          <span class="frame"><span class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span class="frame-url" data-i18n="frame.url">New Tab</span></span>
+          <picture><source type="image/webp" srcset="assets/screenshot-3-arabic.webp"><img src="assets/screenshot-3-arabic.png" width="1280" height="800" loading="lazy" data-i18n-attr="alt:shots.a3" alt="The Arabic interface at Maghrib, laid out right to left"></picture></span>
+        </button>
+        <figcaption data-i18n="shots.c3">The Arabic interface at Maghrib, right to left.</figcaption>
+      </figure>
+      <figure class="shot" id="shot-3" role="tabpanel" aria-labelledby="tab-3" hidden>
+        <button class="zoom" type="button" data-full="assets/screenshot-5-popup.png" data-i18n-attr="aria-label:shots.zoom" aria-label="Open full size">
+          <span class="frame"><span class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span class="frame-url" data-i18n="frame.url">New Tab</span></span>
+          <picture><source type="image/webp" srcset="assets/screenshot-5-popup.webp"><img src="assets/screenshot-5-popup.png" width="1280" height="800" loading="lazy" data-i18n-attr="alt:shots.a4" alt="The toolbar popup showing the next prayer and today's times"></picture></span>
+        </button>
+        <figcaption data-i18n="shots.c4">The toolbar popup: the next prayer and today's times, one click away.</figcaption>
+      </figure>
+      <dialog class="lightbox" id="lightbox">
+        <form method="dialog"><button class="icon-btn" data-i18n-attr="aria-label:shots.close" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></form>
+        <img id="lightboxImg" src="" alt="">
+      </dialog>
+    </section>
+
+    <!-- ===== Privacy ===== -->
+    <section class="section" id="privacy" aria-labelledby="priv-h">
+      <div class="section-head">
+        <span class="label" data-i18n="priv.label">Privacy</span>
+        <h2 id="priv-h" data-i18n="priv.title">Private by design</h2>
+        <p class="lede" data-i18n="priv.lede">No account, no ads, no analytics. The developer never receives any of your data. Prayer times and the Qibla are calculated on your device.</p>
+      </div>
+      <div class="privacy">
+        <div class="card">
+          <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span data-i18n="priv.local.t">Stays on your device</span></h3>
+          <ul class="ticks">
+            <li data-i18n="priv.local.1">Your settings, saved by Chrome. Chrome syncs them to your own devices if sync is on.</li>
+            <li data-i18n="priv.local.2">Prayer times and the Qibla, calculated locally.</li>
+            <li data-i18n="priv.local.3">The Quran text and the hadith, bundled with the extension. They work offline.</li>
+            <li data-i18n="priv.local.4">Your Quran reading progress.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c2.5 2.7 3.8 6 3.8 9.5s-1.3 6.8-3.8 9.5c-2.5-2.7-3.8-6-3.8-9.5S9.5 5.2 12 2.5z"/></svg><span data-i18n="priv.net.t">Goes online only when you use it</span></h3>
+          <ul class="ticks net">
+            <li data-i18n="priv.net.1"><b>Weather</b> from Open-Meteo, using your saved coordinates. You can turn it off.</li>
+            <li data-i18n="priv.net.2"><b>City names</b> from OpenStreetMap Nominatim, when you search for a city or use your location.</li>
+            <li data-i18n="priv.net.3"><b>Recitation audio</b> from Islamic Network, only when you press play.</li>
+          </ul>
+        </div>
+      </div>
+      <a class="more-link" href="privacy.html"><span data-i18n="priv.link">Read the full privacy policy</span><svg class="flip" width="16" height="16" aria-hidden="true"><use href="#i-next"/></svg></a>
+    </section>
+
+    <!-- ===== Get started ===== -->
+    <section class="section" id="install" aria-labelledby="start-h">
+      <div class="section-head">
+        <span class="label" data-i18n="start.label">Get started</span>
+        <h2 id="start-h" data-i18n="start.title">Ready in under a minute</h2>
+      </div>
+      <ol class="steps">
+        <li class="card"><h3 data-i18n="start.s1.t">Add it to Chrome</h3><p data-i18n="start.s1.d">Install Salat First from the Chrome Web Store. It's free.</p></li>
+        <li class="card"><h3 data-i18n="start.s2.t">Set your location</h3><p data-i18n="start.s2.d">Open a new tab and allow your location, or search for your city instead.</p></li>
+        <li class="card"><h3 data-i18n="start.s3.t">Make it yours</h3><p data-i18n="start.s3.d">Pick the calculation method your mosque follows, your language and the prayers you want to be notified about.</p></li>
+      </ol>
+      <div class="start-cta">
+        <a class="btn btn-primary" data-store href="https://chromewebstore.google.com/search/Salat%20First" target="_blank" rel="noopener">
+          <svg width="18" height="18" aria-hidden="true"><use href="#i-ext"/></svg><span data-i18n="cta.add">Add to Chrome</span>
+        </a>
+        <p data-i18n="start.note">Free, with no account and no ads.</p>
+      </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="section" id="faq" aria-labelledby="faq-h">
+      <div class="faq-grid">
+        <div class="section-head">
+          <span class="label" data-i18n="faq.label">FAQ</span>
+          <h2 id="faq-h" data-i18n="faq.title">Questions, answered</h2>
+        </div>
+        <div class="faq">
+          <details><summary data-i18n="faq.q1">Is Salat First free?</summary><p data-i18n="faq.a1">Yes. There are no ads, no subscriptions and no account to create.</p></details>
+          <details><summary data-i18n="faq.q2">How are the prayer times calculated?</summary><p data-i18n="faq.a2">On your device, with the astronomical formulas of the open-source adhan-js library. Choose the method your local mosque follows from 16 options, such as Umm al-Qura, the Muslim World League, Egypt, North America (ISNA) and Morocco (Ministry of Habous).</p></details>
+          <details><summary data-i18n="faq.q3">Does it work offline?</summary><p data-i18n="faq.a3">Prayer times, the Quran text and the hadith are bundled with the extension and work without a connection. The weather, city search and recitation audio need the internet.</p></details>
+          <details><summary data-i18n="faq.q4">How do prayer notifications work?</summary><p data-i18n="faq.a4">At each prayer time, Chrome shows a notification, with an optional sound. You can also get a reminder before the prayer. Notifications appear while Chrome is running.</p></details>
+          <details><summary data-i18n="faq.q5">Does it replace my new tab page?</summary><p data-i18n="faq.a5">Yes, that's where the dashboard lives. To get Chrome's default new tab back, turn off or remove the extension in <code>chrome://extensions</code>.</p></details>
+          <details><summary data-i18n="faq.q6">Which languages does it support?</summary><p data-i18n="faq.a6">English, French and Arabic, with a fully right-to-left Arabic interface. The Quran is shown with an English or French translation.</p></details>
+          <details><summary data-i18n="faq.q7">What data do you collect?</summary><p data-i18n="faq.a7">None. Your settings stay in Chrome and nothing is sent to the developer. The <a href="privacy.html">privacy policy</a> explains each service the extension contacts, and why.</p></details>
+          <details><summary data-i18n="faq.q8">I found a problem or have an idea. Where do I go?</summary><p data-i18n="faq.a8"><a href="https://github.com/zakaria-bali/salat-first/issues" target="_blank" rel="noopener">Open an issue on GitHub</a>. Bug reports, ideas and translation fixes are all welcome.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Support ===== -->
+    <section class="section" id="support" aria-labelledby="support-h">
+      <div class="support">
+        <div class="section-head">
+          <span class="label" data-i18n="support.label">Support</span>
+          <h2 id="support-h" data-i18n="support.title">Free for everyone. Support is welcome.</h2>
+          <p class="lede" data-i18n="support.lede">Salat First has no ads and collects nothing. If it helps you pray on time, you can help keep it maintained and improving.</p>
+        </div>
+        <div class="support-links">
+          <a class="pay kofi" href="https://ko-fi.com/zakariaba" target="_blank" rel="noopener">
+            <span class="logo"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 8h13v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V8z"/><path d="M17 10h1.5a2.5 2.5 0 0 1 0 5H17"/><path d="M10.5 15.5s-3-1.8-3-3.6a1.5 1.5 0 0 1 3-.4 1.5 1.5 0 0 1 3 .4c0 1.8-3 3.6-3 3.6z" fill="currentColor" stroke="none"/></svg></span>
+            <span><strong data-i18n="support.kofi.t">Support on Ko-fi</strong><span data-i18n="support.kofi.d">One-off or monthly, by card</span></span>
+            <svg class="arrow flip" width="18" height="18" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a>
+          <a class="pay paypal" href="https://paypal.me/zakariabali" target="_blank" rel="noopener">
+            <span class="logo"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8.2 21H4.6a.5.5 0 0 1-.5-.6L6.9 3.4A.7.7 0 0 1 7.6 3h6.2c3.4 0 5.4 1.8 4.9 4.9-.6 3.6-3 5.3-6.4 5.3H10a.7.7 0 0 0-.7.6L8.2 21z"/></svg></span>
+            <span><strong data-i18n="support.paypal.t">Donate with PayPal</strong><span data-i18n="support.paypal.d">Any amount, any currency</span></span>
+            <svg class="arrow flip" width="18" height="18" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="helps">
+        <div class="card help">
+          <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 16.8 6.6 19.7l1.1-6.1-4.5-4.2 6.1-.8z"/></svg><span data-i18n="support.rate.t">Leave a review</span></h3>
+          <p data-i18n="support.rate.d">A few words on the Chrome Web Store help others find it.</p>
+          <a class="go" data-store-review href="https://chromewebstore.google.com/search/Salat%20First" target="_blank" rel="noopener"><span data-i18n="support.rate.go">Open the Chrome Web Store</span><svg class="flip" width="15" height="15" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+        <div class="card help">
+          <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="m8.2 13.3 7.6 4.4M15.8 6.3l-7.6 4.4"/></svg><span data-i18n="support.share.t">Share it</span></h3>
+          <p class="hadith" lang="ar" dir="rtl">«مَن دَلَّ على خيرٍ فله مثلُ أجرِ فاعلِه»</p>
+          <p class="hadith-tr" data-i18n="support.share.tr">“Whoever guides someone to goodness has a reward like the one who does it.”</p>
+          <p class="src" data-i18n="support.share.src">Sahih Muslim</p>
+          <button class="btn btn-ghost btn-sm" id="shareBtn" type="button" data-i18n="support.share.btn">Share Salat First</button>
+        </div>
+        <div class="card help">
+          <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 2.4 17.5A2 2 0 0 0 4.1 20.5h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg><span data-i18n="support.report.t">Report a problem</span></h3>
+          <p data-i18n="support.report.d">Found a bug, a wrong time or a translation mistake? Open an issue on GitHub.</p>
+          <a class="go" href="https://github.com/zakaria-bali/salat-first/issues" target="_blank" rel="noopener"><span data-i18n="support.report.go">Open an issue</span><svg class="flip" width="15" height="15" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <div class="foot-grid">
+        <div class="foot-brand">
+          <a class="brand" href="./"><img src="assets/icon.png" alt="" width="34" height="34"><span data-i18n="brand">Salat First</span></a>
+          <p data-i18n="footer.tagline">Prayer times, Quran and hadith on every new tab.</p>
+        </div>
+        <div class="foot-col">
+          <h4 data-i18n="footer.ext">Extension</h4>
+          <ul>
+            <li><a href="#features" data-i18n="nav.features">Features</a></li>
+            <li><a href="#preview" data-i18n="nav.preview">Live preview</a></li>
+            <li><a href="#screenshots" data-i18n="nav.screens">Screenshots</a></li>
+            <li><a href="#faq" data-i18n="nav.faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="foot-col">
+          <h4 data-i18n="footer.project">Project</h4>
+          <ul>
+            <li><a href="privacy.html" data-i18n="footer.privacy">Privacy policy</a></li>
+            <li><a href="https://github.com/zakaria-bali/salat-first" target="_blank" rel="noopener" data-i18n="footer.source">Source code</a></li>
+            <li><a href="https://github.com/zakaria-bali/salat-first/issues" target="_blank" rel="noopener" data-i18n="footer.issues">Report a problem</a></li>
+          </ul>
+        </div>
+        <div class="foot-col">
+          <h4 data-i18n="footer.support">Support</h4>
+          <ul>
+            <li><a href="https://ko-fi.com/zakariaba" target="_blank" rel="noopener">Ko-fi</a></li>
+            <li><a href="https://paypal.me/zakariabali" target="_blank" rel="noopener">PayPal</a></li>
+            <li><a data-store-review href="https://chromewebstore.google.com/search/Salat%20First" target="_blank" rel="noopener" data-i18n="support.rate.t">Leave a review</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="foot-small">
+        <p data-i18n="footer.credits">Built on open data: Quran and hadith texts from fawazahmed0 (public domain), prayer calculation with adhan-js (MIT), weather from Open-Meteo (CC BY 4.0), recitations from Islamic Network and city search from OpenStreetMap Nominatim.</p>
+        <p data-i18n="footer.site">This website sets no cookies and loads nothing from other sites. Your language and theme choices are remembered in your browser.</p>
+        <p>© 2026 Zakaria Bali</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
